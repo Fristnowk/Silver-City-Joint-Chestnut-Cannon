@@ -1,0 +1,76 @@
+{
+  "name": "vue-test-electron",
+  "author": "Fristnowk",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/background.js",
+  "scripts": {
+    "dev": " vite --host 0.0.0.0",
+    "build": "vite build --mode production",
+    "preview": "vite preview",
+    "electron:dev": "concurrently vite \"cross-env NODE_ENV=true electron .\"",
+    "electron:build": "vite build --mode electron && electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "element-plus": "^2.7.5",
+    "vite-plugin-singlefile": "^2.0.1",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "concurrently": "^8.2.2",
+    "electron": "^30.0.3",
+    "electron-builder": "^24.13.3",
+    "vite": "^5.2.8"
+  },
+  "build": {
+    "appId": "test-vue3-electron",
+    "productName": "白银城-联栗炮计算器",
+    "copyright": "Copyright © year ${author}",
+    "directories": {
+      "output": "vue3-Electron-Test-${author}"
+    },
+    "extraResources": [
+      {
+        "from": "src/assets",
+        "to": "./img"
+      }
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "mac": {
+      "category": "public.app-category.games",
+      "icon": "build/icon.icns",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        },
+        "zip",
+        "mas"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": true,
+      "allowElevation": true
+    }
+  }
+}
